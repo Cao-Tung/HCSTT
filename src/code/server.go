@@ -5,11 +5,13 @@ import (
 	"gen-go/hello"
 	"fmt"
 	"time"
-	"strconv"
+	"strings"
 )
 
 var job int
 var jobs chan string
+var dict []string
+var data []string
 
 type HelloHandler struct {
 	str string
@@ -20,14 +22,30 @@ func NewHelloHandler() *HelloHandler{
 }
 
 func (hl *HelloHandler)  HelloString(para string) (r string, err error){
-	job ++
-	c := strconv.Itoa(job)
-	st := c + para
-	jobs <- st
-	fmt.Println(para)
+	//job ++
+	//c := strconv.Itoa(job)
+	//st := c + para
+	//jobs <- st
+	//fmt.Println(para)
+	ExtractData(para)
 	return para, nil
 }
 
+func ExtractData(para string) (r string, err error){
+	data = make([]string,0)
+	temp := make([]string,0)
+	strs := strings.Split(para,",")
+	for _,str := range strs{
+		for _,top := range dict{
+			if strings.Contains(str,top){
+				arr := strings.Split(str,top)
+				temp = append(temp, arr[1])
+			}
+		}
+	}
+	fmt.Println(temp)
+	return
+}
 
 func worker(id int) {
 	for j := range jobs {
@@ -38,6 +56,7 @@ func worker(id int) {
 }
 
 func main() {
+	dict = []string{" is ", " am ", " like ", " love ", " want ", " and ", " buy "}
 	jobs = make(chan string, 30)
 	job = 0
 	hel := NewHelloHandler()
