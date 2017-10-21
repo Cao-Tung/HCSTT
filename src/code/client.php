@@ -24,7 +24,7 @@ try {
   $client = new HelloClient($protocol);
   $transport->open();
 
-  print $client->HelloString("Hello PHP");
+  print $client->HelloString("I want buy a T-Shirt,it's color is red,I am tall");
   print "\n";
 
 } catch (TException $tx) {

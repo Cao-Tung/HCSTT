@@ -27,11 +27,15 @@ func (hl *HelloHandler)  HelloString(para string) (r string, err error){
 	//st := c + para
 	//jobs <- st
 	//fmt.Println(para)
-	ExtractData(para)
-	return para, nil
+	var response string = ""
+	extract , err := ExtractData(para)
+	for _, str := range extract{
+		response = str + "," + response
+	}
+	return response, err
 }
 
-func ExtractData(para string) (r string, err error){
+func ExtractData(para string) (r []string, err error){
 	data = make([]string,0)
 	strs := strings.Split(para,",")
 	for _,str := range strs{
@@ -44,7 +48,7 @@ func ExtractData(para string) (r string, err error){
 		data = append(data, str)
 	}
 	fmt.Println(data)
-	return
+	return data, nil
 }
 
 func worker(id int) {
