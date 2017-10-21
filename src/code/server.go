@@ -33,17 +33,17 @@ func (hl *HelloHandler)  HelloString(para string) (r string, err error){
 
 func ExtractData(para string) (r string, err error){
 	data = make([]string,0)
-	temp := make([]string,0)
 	strs := strings.Split(para,",")
 	for _,str := range strs{
 		for _,top := range dict{
-			if strings.Contains(str,top){
-				arr := strings.Split(str,top)
-				temp = append(temp, arr[1])
+			if strings.Contains(str,top) {
+				arr := strings.Split(str, top)
+				str = " " + arr[1]
 			}
 		}
+		data = append(data, str)
 	}
-	fmt.Println(temp)
+	fmt.Println(data)
 	return
 }
 
@@ -56,7 +56,7 @@ func worker(id int) {
 }
 
 func main() {
-	dict = []string{" is ", " am ", " like ", " love ", " want ", " and ", " buy "}
+	dict = []string{" is ", " am ", " like ", " love ", " want ", " and ", " buy ", " a "}
 	jobs = make(chan string, 30)
 	job = 0
 	hel := NewHelloHandler()

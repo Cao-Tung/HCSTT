@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"gen-go/hello"
-	"time"
 )
 
 func main() {
@@ -24,7 +23,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	time.Sleep(3000 * time.Millisecond)
 	r1, e1 := client.HelloString("I want buy a T-Shirt,it's color is red,I am tall")
 	fmt.Println("Call->", r1, e1)
 
