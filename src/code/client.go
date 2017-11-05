@@ -23,7 +23,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	r1, e1 := client.HelloString("I want buy a T-Shirt,it's color is red,I am tall")
+	r1, e1 := client.HelloString("I want buy a jackets,it's color is black,my tall is 1m73, my weight is 53kg")
 	fmt.Println("Call->", r1, e1)
 
 }

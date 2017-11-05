@@ -1,10 +1,15 @@
 <?php
+
 error_reporting(E_ALL);
+
 require_once __DIR__.'/php/lib/Thrift/ClassLoader/ThriftClassLoader.php';
+
 use Thrift\ClassLoader\ThriftClassLoader;
+
 $loader = new ThriftClassLoader();
 $loader->registerNamespace('Thrift', __DIR__ . '/php/lib');
 $loader->register();
+
 use Thrift\Protocol\TBinaryProtocol;
 use Thrift\Transport\TSocket;
 use Thrift\Transport\THttpClient;
@@ -18,8 +23,10 @@ try {
   $protocol = new TBinaryProtocol($transport);
   $client = new HelloClient($protocol);
   $transport->open();
+
   print $client->HelloString("I want buy a T-Shirt,it's color is red,I am tall");
   print "\n";
+
 } catch (TException $tx) {
   print 'TException: '.$tx->getMessage()."\n";
 }
